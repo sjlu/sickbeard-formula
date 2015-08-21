@@ -1,0 +1,3 @@
+SB_USER={{ salt['pillar.get']('sickbeard:user') }}  
+SB_HOME={{ salt['pillar.get']('sickbeard:home_folder') }}  
+SB_DATA={{ salt['pillar.get']('sickbeard:data_folder') }}  

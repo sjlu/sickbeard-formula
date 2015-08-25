@@ -2,10 +2,6 @@ python-cheetah:
   pkg.installed:
     - name: python-cheetah
 
-git:
-  pkg.installed:
-    - name: git
-
 sickbeard:
   git.latest:
     - name: https://github.com/midgetspy/Sick-Beard.git
@@ -16,7 +12,14 @@ sickbeard:
     - require:
       - pkg: python-cheetah
       - pkg: git
- 
+
+sickbeard-media-folder:
+  file.directory:
+    - name: /var/www/media/tv
+    - user: www-data
+    - group: www-data
+    - mode: 755
+
 sickbeard-init:
   file.managed:
     - name: /etc/init.d/sickbeard

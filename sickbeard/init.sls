@@ -13,26 +13,6 @@ sickbeard:
       - pkg: python-cheetah
       - pkg: git
 
-sickbeard-service:
-  service.running: 
-    - enable: True
-    - reload: True
-    - name: sickbeard
-    - watch:
-      - file: sickbeard-config
-
-sickbeard-stop:
-  service.dead:
-    - name: sickbeard
-
-sickbeard-media-folder:
-  file.directory:
-    - name: /var/www/media/tv
-    - user: www-data
-    - group: www-data
-    - mode: 755
-    - makedirs: True
-
 sickbeard-init:
   file.managed:
     - name: /etc/init.d/sickbeard
@@ -50,6 +30,30 @@ sickbeard-default:
     - mode: 644
     - template: jinja
 
+sickbeard-media-folder:
+  file.directory:
+    - name: /var/www/media/tv
+    - user: www-data
+    - group: www-data
+    - mode: 755
+    - makedirs: True
+
+sickbeard-service:
+  service.enabled:
+    - name: sickbeard
+
+sickbeard-start:
+  cmd.run:
+    - name: /etc/init.d/sickbeard start
+    - onchanges:
+      - file: sickbeard-default
+
+sickbeard-stop:
+  cmd.run:
+    - name: /etc/init.d/sickbeard stop
+    - prereq:
+      - file: sickbeard-config
+
 sickbeard-config:
   file.managed:
     - name: /var/www/.sickbeard/config.ini
@@ -61,7 +65,8 @@ sickbeard-config:
     - watch_in:
       - service: sickbeard
 
-sickbeard-start:
-  service.running:
-    - name: sickbeard
-
+sickbeard-restart:
+  cmd.run:
+    - name: /etc/init.d/sickbeard restart
+    - onchanges:
+      - file: sickbeard-config

@@ -70,3 +70,23 @@ sickbeard-restart:
     - name: /etc/init.d/sickbeard restart
     - onchanges:
       - file: sickbeard-config
+
+sickbeard-post-processing:
+  file.symlink:
+    - name: /var/www/scripts/autoProcessTV.py
+    - target: /var/www/sickbeard/autoProcessTV/autoProcessTV.py
+    - user: www-data
+
+sickbeard-post-processing-2:
+  file.symlink:
+    - name: /var/www/scripts/sabToSickBeard.py
+    - target: /var/www/sickbeard/autoProcessTV/sabToSickBeard.py
+    - user: www-data
+
+sickbeard-post-processing-config:
+  file.managed:
+    - name: /var/www/scripts/autoProcessTV.cfg
+    - source: salt://sickbeard/files/autoProcessTV.cfg
+    - user: www-data
+    - template: jinja
+

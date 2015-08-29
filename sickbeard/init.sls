@@ -35,8 +35,13 @@ sickbeard-media-folder:
     - name: /var/www/media/tv
     - user: www-data
     - group: www-data
-    - mode: 755
+    - dir_mode: 755
+    - file_mode: 644
     - makedirs: True
+    - recurse:
+      - user
+      - group
+      - mode
 
 sickbeard-service:
   service.enabled:

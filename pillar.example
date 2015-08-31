@@ -10,3 +10,4 @@ sickbeard:
   - pushover_enabled: 1
   - pushover_userkey: 
   - newznab_data: "Sick Beard Index|http://lolo.sickbeard.com/|0|5030,5040|1!!!NZBs.org|http://nzbs.org/||5030,5040,5070,5090|1!!!Usenet-Crawler|https://www.usenet-crawler.com/||5030,5040|0!!!DOGnzb|https://api.dognzb.cr/||5030,5040|0"
+  - api_key:
